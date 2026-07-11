@@ -68,7 +68,8 @@ function setCategory(id) {
 
 // ── Swatch rendering ─────────────────────────────────────────────────────────
 // CSS approximations of each material family, derived from the bead color.
-function swatchStyle(bead) {
+// Also used by team.html for the bead avatars.
+export function swatchStyle(bead) {
   const c = bead.color;
   switch (bead.category) {
     case 'metallic':

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The team — Brace4Change</title>
+  <meta name="description" content="The ten pairs of hands behind Brace4Change: who we are, why we started, and who strings, writes, and delivers every bracelet in Des Moines." />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%237C2136'/%3E%3Ccircle cx='11' cy='11' r='4' fill='%23F5F4F0' opacity='.55'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/tw-config.js"></script>
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body class="font-body">
+
+  <!-- ── Nav ─────────────────────────────────────────────────────────────── -->
+  <header class="flex items-center justify-between px-6 py-5 md:px-12">
+    <a href="index.html" class="font-display text-xl tracking-tight">Brace4Change</a>
+    <nav class="flex items-center gap-6 font-mono text-xs uppercase tracking-widest">
+      <a href="index.html#how" class="hidden hover:text-garnet md:block">How it works</a>
+      <a href="index.html#impact" class="hidden hover:text-garnet md:block">Impact</a>
+      <a href="index.html#builder" class="rounded-full border border-ink px-5 py-2.5 transition-colors hover:bg-ink hover:text-porcelain">Design yours</a>
+    </nav>
+  </header>
+
+  <main class="px-6 md:px-12">
+
+    <!-- ── Founder story ─────────────────────────────────────────────────── -->
+    <!-- ⚠️ Placeholder story — replace with the real founding story. -->
+    <section class="grid gap-12 py-20 md:py-28 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <p class="mb-8 font-mono text-xs uppercase tracking-widest text-garnet">The team</p>
+        <h1 class="font-display text-[clamp(2.8rem,6vw,5.2rem)] leading-[0.98] tracking-tight">
+          Strung together by <em class="text-garnet">ten pairs</em> of hands.
+        </h1>
+      </div>
+      <div class="space-y-6 text-lg leading-relaxed text-ink/70 lg:col-span-5 lg:pt-6">
+        <p>
+          Brace4Change started in a Des Moines kitchen with a bag of beads, a spool of elastic
+          cord, and a simple observation: a small, handmade thing can carry a lot of care.
+        </p>
+        <p>
+          The first bracelets were for friends. Then someone suggested making a second copy of
+          each one and giving it away — and the twin rule stuck. Today, every $4.99 bracelet is
+          strung twice, and the twin travels with a handwritten note to a nursing home or
+          shelter nearby.
+        </p>
+        <p>
+          We're students, neighbors, and volunteers. Nobody here is paid; everything after the
+          cost of beads goes back into making more bracelets.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── The ten ───────────────────────────────────────────────────────── -->
+    <section class="border-t border-pewter py-20">
+      <div class="mb-14 flex flex-wrap items-end justify-between gap-4">
+        <h2 class="font-display text-4xl md:text-5xl">The ten of us.</h2>
+        <p class="font-mono text-xs uppercase tracking-widest text-ink/50">Des Moines, Iowa</p>
+      </div>
+      <div id="team-grid" class="grid gap-x-8 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"></div>
+    </section>
+
+    <!-- ── Join CTA ──────────────────────────────────────────────────────── -->
+    <section class="border-t border-pewter py-20 text-center">
+      <h2 class="font-display text-4xl md:text-5xl">Eleven pairs of hands string <em class="text-garnet">faster.</em></h2>
+      <p class="mx-auto mt-6 max-w-md text-lg leading-relaxed text-ink/70">
+        We string most Saturdays. No experience needed — the beads are patient.
+      </p>
+      <a href="https://ig.me/m/brace4change.official" target="_blank" rel="noopener" class="mt-10 inline-block rounded-full bg-ink px-8 py-4 font-mono text-xs uppercase tracking-widest text-porcelain transition-colors hover:bg-garnet">DM us to join</a>
+    </section>
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────────────────── -->
+  <footer class="border-t border-pewter px-6 py-14 md:px-12">
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="font-display text-3xl">Brace4Change</p>
+        <p class="mt-2 text-sm text-ink/60">Handmade in Des Moines, Iowa. One kept, one given — every time.</p>
+      </div>
+      <div class="font-mono text-xs uppercase tracking-widest text-ink/60">
+        <a href="team.html" class="hover:text-garnet">Team</a>
+        <span class="mx-3">·</span>
+        <a href="legal.html" class="hover:text-garnet">Privacy &amp; Terms</a>
+        <span class="mx-3">·</span>
+        <a href="https://instagram.com/brace4change.official" target="_blank" rel="noopener" class="hover:text-garnet">@brace4change.official</a>
+        <span class="mx-3">·</span>
+        <span>© <span id="year"></span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/team.js"></script>
+</body>
+</html>

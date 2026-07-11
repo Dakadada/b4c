@@ -13,26 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            porcelain: '#F5F4F0',
-            ink: '#1B1A17',
-            pewter: '#C9C7BE',
-            garnet: '#7C2136',
-            pearl: '#EDEAE3',
-          },
-          fontFamily: {
-            display: ['"Instrument Serif"', 'serif'],
-            body: ['"Instrument Sans"', 'sans-serif'],
-            mono: ['"IBM Plex Mono"', 'monospace'],
-          },
-        },
-      },
-    };
-  </script>
+  <script src="js/tw-config.js"></script>
   <link rel="stylesheet" href="css/main.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -62,6 +43,7 @@
     <nav class="flex items-center gap-6 font-mono text-xs uppercase tracking-widest">
       <a href="#how" class="hidden hover:text-garnet md:block">How it works</a>
       <a href="#impact" class="hidden hover:text-garnet md:block">Impact</a>
+      <a href="team.html" class="hidden hover:text-garnet md:block">Team</a>
       <a href="#builder" class="rounded-full border border-ink px-5 py-2.5 transition-colors hover:bg-ink hover:text-porcelain">Design yours</a>
     </nav>
   </header>
@@ -271,6 +253,10 @@
         <p class="mt-2 text-sm text-ink/60">Handmade in Des Moines, Iowa. One kept, one given — every time.</p>
       </div>
       <div class="font-mono text-xs uppercase tracking-widest text-ink/60">
+        <a href="team.html" class="hover:text-garnet">Team</a>
+        <span class="mx-3">·</span>
+        <a href="legal.html" class="hover:text-garnet">Privacy &amp; Terms</a>
+        <span class="mx-3">·</span>
         <a href="https://instagram.com/brace4change.official" target="_blank" rel="noopener" class="hover:text-garnet">@brace4change.official</a>
         <span class="mx-3">·</span>
         <span>© <span id="year"></span></span>

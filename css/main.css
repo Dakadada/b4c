@@ -198,6 +198,15 @@ body {
   opacity: 1;
 }
 
+/* ── Team ─────────────────────────────────────────────────────────────────── */
+.team-avatar {
+  display: block;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgb(0 0 0 / 0.08);
+}
+
 /* ── Order ────────────────────────────────────────────────────────────────── */
 #design-strip {
   display: flex;
