@@ -1,7 +1,7 @@
 import { BEADS_BY_ID, CATEGORIES, SLOT_COUNT, UNIT_PRICE } from './beads.js';
 import { subscribe, getState } from './builder.js';
 
-export const INSTAGRAM_HANDLE = 'brace4change';
+export const INSTAGRAM_HANDLE = 'brace4change.official';
 
 const money = (n) => `$${n.toFixed(2)}`;
 
