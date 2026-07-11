@@ -5,13 +5,13 @@ import { swatchStyle } from './builder.js';
 // `beadId` picks the member's avatar bead (any id from js/beads.js).
 const TEAM = [
   { name: 'Srihari Kumaresan', role: 'Founder', line: 'Started Brace4Change from his kitchen table with a bag of beads', beadId: 'garnet' },
-  { name: 'Savi Reddy', role: 'Co-founder', line: 'Keeps the twin of every bracelet honest — same beads, same order, every time.', beadId: 'gold' },
+  { name: 'Savi Reddy', role: 'Co-founder', line: 'Keeps the twin of every bracelet honest.', beadId: 'gold' },
   { name: 'Quinnlyn Schulte', role: 'Management', line: 'Knows the kaleidoscopics by heart.', beadId: 'oil-slick' },
-  { name: 'Chloe Kiekhafer', role: 'Bead lead', line: 'Strings the fastest, checks the knots twice.', beadId: 'copper' },
-  { name: 'Linda Lu', role: 'Bead lead', line: 'Sorts, counts, and restocks every finish.', beadId: 'ivory-pearl' },
-  { name: 'Zoe Studer', role: 'Notes', line: 'Has written more encouragement than anyone we know.', beadId: 'blush-pearl' },
-  { name: 'Elle Behn', role: 'Notes', line: 'Walks the twins and their notes to nursing homes across Des Moines.', beadId: 'cornflower' },
-  { name: 'Brianna Launderville', role: 'Notes', line: 'Coordinates with shelters so every bracelet lands on the right wrist.', beadId: 'seafoam-pearl' },
+  { name: 'Chloe Kiekhafer', role: 'Bead lead', line: 'Strings the fastest.', beadId: 'copper' },
+  { name: 'Linda Lu', role: 'Headbeader', line: 'Sorts, counts, and restocks every finish.', beadId: 'ivory-pearl' },
+  { name: 'Zoe Studer', role: 'Note boss', line: 'Has written more encouragement than anyone we know.', beadId: 'blush-pearl' },
+  { name: 'Elle Behn', role: 'Notetaker', line: 'Walks the twins and their notes to nursing homes across Des Moines.', beadId: 'cornflower' },
+  { name: 'Brianna Launderville', role: 'Notary', line: 'Coordinates with shelters so every bracelet lands on the right wrist.', beadId: 'seafoam-pearl' },
   { name: 'Adino Dyett', role: 'Outreach', line: 'the goat?', beadId: 'peacock' },
   { name: 'Aadil Patel', role: 'Outreach', line: 'Turns first-time stringers into regulars, one Saturday at a time.', beadId: 'honey' },
 ];
