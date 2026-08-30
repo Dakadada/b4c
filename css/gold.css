@@ -1,0 +1,245 @@
+/* gold.css — VibeCurb visual-redesign, atmosphere layer.
+   Loaded LAST (after main.css). Purely additive and reversible:
+   remove the <link> in index.html to revert entirely.
+
+   The site already ships a display serif, a warm garnet/porcelain
+   palette, GSAP motion and hover states — it is NOT slop. The one
+   layer the audit found genuinely thin is ATMOSPHERE: the background
+   is a flat solid, and the two bordered cards sit weightless with no
+   depth. This file adds warmth + depth only. It touches NO JavaScript,
+   NO GSAP-owned motion, and NO [data-reveal] elements. */
+
+:root {
+  --garnet-rgb: 124, 33, 54;
+  --ease-snap: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Dark-band tokens (used ONLY inside .hero-dark / .impact-dark).
+     Near-black is warm (#141210), not flat #000, so the ambient glow
+     has data to register. Base garnet #7C2136 is too dark to read on
+     near-black, so the accent brightens to a rose-garnet in dark bands. */
+  --ink-deep: #141210;
+  --garnet-glow: #cf4b64;
+  --garnet-glow-rgb: 207, 75, 100;
+}
+
+/* ── Dark cinematic hero + impact bookend ──────────────────────────────────── */
+/* The site was porcelain-on-porcelain everywhere — no contrast, so it read
+   pastel. These two bands inject the drama: near-black grounds with a garnet
+   ambient glow, the 3D bracelet (transparent-bg renderer) floating lit against
+   them. Purely presentational: backgrounds + scoped color flips of existing
+   Tailwind utilities. Removing this file + the hero-dark/impact-dark/hero-nav
+   classes fully reverts. Ancestor-scoped selectors out-specify the utilities. */
+
+.hero-dark {
+  position: relative;
+  color: var(--porcelain);
+  background:
+    radial-gradient(ellipse 58% 62% at 78% 46%, rgba(var(--garnet-glow-rgb), 0.20) 0%, transparent 62%),
+    radial-gradient(ellipse 90% 70% at 50% 0%, rgba(255, 255, 255, 0.035) 0%, transparent 60%),
+    var(--ink-deep);
+}
+
+/* Accent (eyebrow + italic "give away") brightens so it pops on near-black. */
+.hero-dark .text-garnet { color: var(--garnet-glow); }
+.hero-dark .text-ink\/70 { color: rgba(245, 244, 240, 0.72); }
+.hero-dark .text-ink\/50 { color: rgba(245, 244, 240, 0.5); }
+
+/* CTA inverts: an ink pill is invisible on near-black, so go porcelain fill. */
+.hero-dark a.bg-ink {
+  background: var(--porcelain);
+  color: var(--ink);
+}
+.hero-dark a.bg-ink:hover {
+  /* Deep brand garnet (not the lighter glow) as the fill: porcelain text on
+     #7C2136 is ~9.5:1, AA-safe. garnet-glow behind porcelain was only ~3.96:1. */
+  background: var(--garnet);
+  color: var(--porcelain);
+}
+
+/* Nav overlaps the dark hero (it's absolute and scrolls away with it). */
+.hero-nav,
+.hero-nav a { color: var(--porcelain); }
+.hero-nav .hover\:text-garnet:hover { color: var(--garnet-glow); }
+.hero-nav a.border-ink { border-color: rgba(245, 244, 240, 0.45); }
+.hero-nav a.border-ink:hover {
+  background: var(--porcelain);
+  color: var(--ink);
+}
+
+/* ── Impact ledger: same dark ground; filled dots glow like a starfield ─────── */
+.impact-dark {
+  position: relative;
+  color: var(--porcelain);
+  background:
+    radial-gradient(ellipse 72% 55% at 50% 42%, rgba(var(--garnet-glow-rgb), 0.12) 0%, transparent 66%),
+    var(--ink-deep);
+}
+.impact-dark .text-garnet { color: var(--garnet-glow); }
+.impact-dark .text-ink\/60 { color: rgba(245, 244, 240, 0.6); }
+.impact-dark .text-ink\/50 { color: rgba(245, 244, 240, 0.5); }
+.impact-dark .border-pewter { border-color: rgba(245, 244, 240, 0.18); }
+
+.impact-dark .impact-dot { border-color: rgba(245, 244, 240, 0.14); }
+.impact-dark .impact-dot.is-filled {
+  background: var(--garnet-glow);
+  border-color: var(--garnet-glow);
+  box-shadow: 0 0 5px rgba(var(--garnet-glow-rgb), 0.55);
+}
+
+/* ── Atmosphere: flat porcelain → warm, lit ground ─────────────────────────── */
+/* A faint garnet-warm radial from the top, over the existing porcelain.
+   Fixed so it stays put behind the scrolling content. Subtle by design —
+   felt as warmth, not seen as a gradient. */
+body {
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(var(--garnet-rgb), 0.05) 0%, transparent 55%),
+    radial-gradient(90% 60% at 85% 8%, rgba(237, 234, 227, 0.6) 0%, transparent 60%),
+    var(--porcelain);
+  background-attachment: fixed;
+}
+
+/* Grain overlay — felt, not seen. pointer-events:none keeps the 3D
+   bracelet drag and every button fully interactive. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── Depth: the two bordered cards earn a resting shadow + hover lift ───────── */
+/* Builder canvas wrapper and the order-summary card. Warm, low-opacity
+   shadow (not the flat Bootstrap default). Transform lift on hover; the
+   canvas stays draggable because the lift is on the container, not a
+   pointer-events change. */
+#builder-canvas,
+#order .rounded-2xl {
+  box-shadow:
+    0 1px 2px rgba(var(--garnet-rgb), 0.04),
+    0 10px 30px rgba(27, 26, 23, 0.05);
+  transition:
+    transform 0.5s var(--ease-snap),
+    box-shadow 0.5s var(--ease-snap);
+}
+
+#builder-canvas:hover,
+#order .rounded-2xl:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 2px 4px rgba(var(--garnet-rgb), 0.05),
+    0 18px 44px rgba(27, 26, 23, 0.08);
+}
+
+/* ── Micro-physics on the primary pill CTAs ────────────────────────────────── */
+/* They already animate background-color on hover (Tailwind transition-colors).
+   Add a tactile lift + shadow so the most-clicked elements feel physical.
+   Attribute/id selectors out-specify the utility classes, and we extend
+   the transition to include transform + box-shadow. */
+a.bg-ink,
+#btn-copy,
+#btn-fill,
+#btn-shuffle {
+  transition:
+    transform 0.35s var(--ease-snap),
+    box-shadow 0.35s var(--ease-snap),
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+a.bg-ink:hover,
+#btn-copy:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(var(--garnet-rgb), 0.18);
+}
+
+a.bg-ink:active,
+#btn-copy:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 0.1s;
+}
+
+/* ── Motion safety — never override the reduced-motion contract ─────────────── */
+@media (prefers-reduced-motion: reduce) {
+  #builder-canvas,
+  #order .rounded-2xl,
+  a.bg-ink,
+  #btn-copy,
+  #btn-fill,
+  #btn-shuffle {
+    transition: none;
+  }
+  #builder-canvas:hover,
+  #order .rounded-2xl:hover,
+  a.bg-ink:hover,
+  #btn-copy:hover {
+    transform: none;
+  }
+}
+/*
+ * Dark-band hardening. Tailwind Play may inject its utility sheet after this
+ * stylesheet, so each scoped utility correction carries both greater selector
+ * specificity and !important. Keeping these rules scoped makes removal of the
+ * three opt-in classes fully reversible.
+ */
+.hero-dark,
+.impact-dark {
+  color: var(--porcelain, #F5F4F0) !important;
+  background-color: var(--ink-deep, #141210) !important;
+  /* --garnet-glow-rgb is comma-separated (207, 75, 100), so use rgba() with
+     commas. The rgb(... / a) slash form would expand to an invalid mixed
+     comma+slash value and drop the whole declaration. */
+  background-image:
+    radial-gradient(circle at 78% 22%, rgba(var(--garnet-glow-rgb), 0.24), transparent 36%),
+    radial-gradient(circle at 14% 86%, rgba(var(--garnet-glow-rgb), 0.13), transparent 42%) !important;
+}
+
+.hero-dark :is(.text-ink, .text-ink\/90, .text-ink\/80, .text-ink\/70, .text-ink\/60, .text-ink\/50),
+.impact-dark :is(.text-ink, .text-ink\/90, .text-ink\/80, .text-ink\/70, .text-ink\/60, .text-ink\/50),
+.hero-nav :is(.text-ink, .text-ink\/90, .text-ink\/80, .text-ink\/70, .text-ink\/60, .text-ink\/50) {
+  color: var(--porcelain, #F5F4F0) !important;
+}
+
+.hero-dark :is(.text-garnet, .text-garnet\/90, .text-garnet\/80, .text-garnet\/70),
+.impact-dark :is(.text-garnet, .text-garnet\/90, .text-garnet\/80, .text-garnet\/70),
+.hero-nav :is(.text-garnet, .text-garnet\/90, .text-garnet\/80, .text-garnet\/70) {
+  color: var(--garnet-glow, #cf4b64) !important;
+}
+
+.hero-dark :is(.border-ink, .border-ink\/90, .border-ink\/80, .border-ink\/70, .border-ink\/60, .border-ink\/50),
+.impact-dark :is(.border-ink, .border-ink\/90, .border-ink\/80, .border-ink\/70, .border-ink\/60, .border-ink\/50),
+.hero-nav :is(.border-ink, .border-ink\/90, .border-ink\/80, .border-ink\/70, .border-ink\/60, .border-ink\/50) {
+  border-color: rgb(245 244 240 / 0.34) !important;
+}
+
+.hero-dark :is(.bg-porcelain, .bg-pearl),
+.impact-dark :is(.bg-porcelain, .bg-pearl),
+.hero-nav :is(.bg-porcelain, .bg-pearl) {
+  background-color: var(--porcelain, #F5F4F0) !important;
+  color: var(--ink-deep, #141210) !important;
+}
+
+.hero-dark :is(.bg-garnet, .bg-garnet\/90, .bg-garnet\/80),
+.impact-dark :is(.bg-garnet, .bg-garnet\/90, .bg-garnet\/80),
+.hero-nav :is(.bg-garnet, .bg-garnet\/90, .bg-garnet\/80) {
+  background-color: var(--garnet-glow, #cf4b64) !important;
+  color: var(--porcelain, #F5F4F0) !important;
+}
+
+/*
+ * Cord + dark bands, tradeoff (deliberate):
+ * #cord-svg is z-0, drawn BEHIND <main> (z-10). The dark bands paint an opaque
+ * ground, so the cord is hidden WITHIN the hero and impact sections and stays
+ * visible through the transparent light sections between them.
+ *
+ * There is no clean CSS-only fix: the dark fill lives inside <main> (z-10) and
+ * the cord lives outside it (z-0), so the fill is always above the cord. The
+ * only ways to reverse that either lift the cord ABOVE all content
+ * (z-index:20 draws the thread over the hero text, the 3D builder canvas and
+ * the order form — a worse regression) or require JS to position the dark fill
+ * as a page-level layer between the body and the cord (out of scope: no js/*
+ * edits). So we accept the cord fading at the dark bands. It reads as intended:
+ * the thread runs through the light middle of the page.
+ */

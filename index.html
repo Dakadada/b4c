@@ -15,6 +15,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="js/tw-config.js"></script>
   <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/gold.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
@@ -38,7 +39,7 @@
   </svg>
 
   <!-- ── Nav ─────────────────────────────────────────────────────────────── -->
-  <header class="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-6 py-5 md:px-12">
+  <header class="hero-nav absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-6 py-5 md:px-12">
     <a href="#top" class="font-display text-xl tracking-tight">Brace4Change</a>
     <nav class="flex items-center gap-6 font-mono text-xs uppercase tracking-widest">
       <a href="#how" class="hidden hover:text-garnet md:block">How it works</a>
@@ -51,7 +52,7 @@
   <main id="top" class="relative z-10">
 
     <!-- ── Hero ──────────────────────────────────────────────────────────── -->
-    <section class="grid min-h-screen grid-rows-[45vh_auto] lg:grid-cols-2 lg:grid-rows-1">
+    <section class="hero-dark grid min-h-screen grid-rows-[45vh_auto] lg:grid-cols-2 lg:grid-rows-1">
       <div class="relative order-first lg:order-last" data-cord="0.74">
         <div id="hero-canvas" class="absolute inset-0" role="img" aria-label="A rotating 3D bracelet of gold, pearl, garnet and iridescent beads"></div>
       </div>
@@ -124,7 +125,7 @@
     </section>
 
     <!-- ── Impact (pinned) ───────────────────────────────────────────────── -->
-    <section id="impact" data-cord="0.16">
+    <section id="impact" class="impact-dark" data-cord="0.16">
       <div id="impact-pin" class="flex min-h-screen flex-col justify-center px-6 py-24 md:px-12">
         <div class="mb-14 flex items-end justify-between gap-6">
           <p class="font-mono text-xs uppercase tracking-widest text-garnet">The ledger so far</p>
