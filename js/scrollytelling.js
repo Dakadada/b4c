@@ -9,26 +9,16 @@ const CONFIG = {
 
 const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-let lenis = null;
-
 export function initSmoothScroll() {
   gsap.registerPlugin(ScrollTrigger);
-
-  if (!REDUCED_MOTION) {
-    lenis = new Lenis({ duration: 1.15 });
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => lenis.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
-  }
-
-  // Smooth anchor navigation.
+  // Native scrolling keeps wheel/touch input on the browser's compositor.
+  // Smooth only deliberate anchor jumps; never interpolate the user's input.
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener('click', (e) => {
       const target = document.querySelector(a.getAttribute('href'));
       if (!target) return;
       e.preventDefault();
-      if (lenis) lenis.scrollTo(target, { offset: 0 });
-      else target.scrollIntoView({ behavior: 'auto' });
+      target.scrollIntoView({ behavior: REDUCED_MOTION ? 'auto' : 'smooth' });
     });
   });
 }
@@ -41,16 +31,63 @@ export function initCord() {
   if (!svg) return;
 
   let len = 0;
+  let curve;
+  let framePending = false;
+  const canvas = document.createElement('canvas');
+  canvas.id = 'cord-renderer';
+  canvas.setAttribute('aria-hidden', 'true');
+  canvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:0';
+  svg.after(canvas);
+  const context = canvas.getContext('2d');
+  const progress = { v: REDUCED_MOTION ? 1 : 0 };
+  // Keep the vector as the geometry source, but rasterize only the viewport.
+  // Animating the full-page SVG repainted a ~9,000px-tall surface each tick.
+  svg.style.visibility = 'hidden';
+  function draw() {
+    framePending = false;
+    if (!curve || !len) return;
+    const w = document.documentElement.clientWidth;
+    const h = window.innerHeight;
+    context.clearRect(0, 0, w, h);
+    context.save();
+    context.translate(0, -window.scrollY);
+    context.strokeStyle = 'rgba(124,33,54,.55)';
+    context.lineWidth = 1.5;
+    context.setLineDash([len, len]);
+    context.lineDashOffset = len * (1 - progress.v);
+    context.stroke(curve);
+    if (!REDUCED_MOTION) {
+      const point = path.getPointAtLength(len * progress.v);
+      context.fillStyle = '#7c2136';
+      context.beginPath();
+      context.arc(point.x, point.y, 4, 0, Math.PI * 2);
+      context.fill();
+    }
+    context.restore();
+  }
+  function requestDraw() {
+    if (framePending) return;
+    framePending = true;
+    requestAnimationFrame(draw);
+  }
 
   function build() {
     const w = document.documentElement.clientWidth;
     const h = document.documentElement.scrollHeight;
     if (w < 768) {
       svg.style.display = 'none';
+      canvas.style.display = 'none';
       len = 0;
       return;
     }
     svg.style.display = '';
+    canvas.style.display = '';
+    const ratio = Math.min(window.devicePixelRatio, 2);
+    canvas.width = Math.round(w * ratio);
+    canvas.height = Math.round(window.innerHeight * ratio);
+    canvas.style.width = `${w}px`;
+    canvas.style.height = `${window.innerHeight}px`;
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
     svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
     svg.setAttribute('width', w);
     svg.setAttribute('height', h);
@@ -73,47 +110,50 @@ export function initCord() {
     d += ` L ${anchors.at(-1).x} ${h}`;
     path.setAttribute('d', d);
     len = path.getTotalLength();
+    curve = new Path2D(d);
     path.style.strokeDasharray = len;
     path.style.strokeDashoffset = REDUCED_MOTION ? 0 : len;
+    requestDraw();
   }
 
   build();
+  window.addEventListener('scroll', requestDraw, { passive: true });
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+      build();
+    }, 200);
+  });
 
   if (REDUCED_MOTION) {
     tip.style.display = 'none';
     return;
   }
 
-  const progress = { v: 0 };
   gsap.to(progress, {
     v: 1,
     ease: 'none',
     scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.6 },
     onUpdate() {
       if (!len) return;
-      path.style.strokeDashoffset = len * (1 - progress.v);
-      const p = path.getPointAtLength(len * progress.v);
-      tip.setAttribute('cx', p.x);
-      tip.setAttribute('cy', p.y);
+      requestDraw();
     },
   });
 
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      build();
-      ScrollTrigger.refresh();
-    }, 200);
-  });
 }
 
 // ── Hero entrance ────────────────────────────────────────────────────────────
 export function initHero() {
   if (REDUCED_MOTION) return;
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-  tl.from('.hero-line > span', { yPercent: 105, duration: 1.1, stagger: 0.12 }, 0.15)
-    .from('[data-hero-fade]', { opacity: 0, y: 18, duration: 0.9, stagger: 0.1 }, 0.7);
+  tl.from('.hero-object', { opacity: 0, scale: 0.94, duration: 0.8 }, 0)
+    .from('.hero-line > span', { yPercent: 105, duration: 0.6, stagger: 0.08 }, 0)
+    .from('[data-hero-fade], .hero-bottom', { opacity: 0, y: 18, duration: 0.45, stagger: 0.06 }, 0.1);
+  if (window.innerWidth > 767) {
+    gsap.to('.campaign-macro img', { yPercent: -10, ease: 'none', scrollTrigger: { trigger: '.campaign-macro', start: 'top bottom', end: 'bottom top', scrub: true } });
+  }
 }
 
 // ── How it works: pinned three-station sequence along the cord ───────────────
@@ -152,7 +192,7 @@ export function initHowItWorks() {
 }
 
 // ── Impact: pinned counters + one-dot-per-bracelet grid ──────────────────────
-export function initImpact() {
+export function initImpact(staticOnly = false) {
   const grid = document.getElementById('impact-grid');
   const dots = [];
   for (let i = 0; i < CONFIG.braceletsGiven; i++) {
@@ -170,7 +210,7 @@ export function initImpact() {
     { el: document.getElementById('stat-places'), target: CONFIG.placesReached },
   ];
 
-  if (REDUCED_MOTION) {
+  if (REDUCED_MOTION || staticOnly) {
     counters.forEach(({ el, target }) => (el.textContent = target));
     dots.forEach((d) => d.classList.add('is-filled'));
     return;
@@ -199,13 +239,19 @@ export function initImpact() {
   });
 
   const fill = { n: 0 };
+  let filledCount = 0;
   tl.to(fill, {
     n: dots.length,
     duration: 1,
     ease: 'none',
     onUpdate() {
       const upto = Math.floor(fill.n);
-      dots.forEach((d, i) => d.classList.toggle('is-filled', i < upto));
+      // Only beads crossing the reveal boundary need a DOM mutation.
+      // Works in both scroll directions and on large anchor jumps.
+      for (let i = Math.min(filledCount, upto); i < Math.max(filledCount, upto); i++) {
+        dots[i].classList.toggle('is-filled', i < upto);
+      }
+      filledCount = upto;
     },
   }, 0);
   tl.to({}, { duration: 0.25 });

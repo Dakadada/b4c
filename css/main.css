@@ -7,7 +7,7 @@
 }
 
 html {
-  scroll-behavior: auto; /* Lenis (or reduced-motion) owns scrolling */
+  scroll-behavior: auto; /* Wheel and touch stay native; anchors opt into smooth. */
 }
 
 body {

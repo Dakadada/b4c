@@ -97,6 +97,14 @@ export function initBuilder(scene) {
   const tabsEl = document.getElementById('palette-tabs');
   const gridEl = document.getElementById('palette-grid');
   const countEl = document.getElementById('bead-count');
+  const slotControls = document.getElementById('slot-controls');
+  const slotButtons = Array.from({ length: SLOT_COUNT }, (_, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.addEventListener('click', () => selectSlot(index));
+    slotControls?.appendChild(button);
+    return button;
+  });
 
   CATEGORIES.forEach((cat) => {
     const btn = document.createElement('button');
@@ -134,6 +142,12 @@ export function initBuilder(scene) {
   scene.setDesign(state.slots);
 
   subscribe((s) => {
+    slotButtons.forEach((button, index) => {
+      const bead = BEADS_BY_ID[s.slots[index]];
+      button.style.cssText = bead ? swatchStyle(bead) : '';
+      button.setAttribute('aria-label', `Bead ${index + 1}: ${bead?.name || 'empty'}`);
+      button.setAttribute('aria-pressed', String(s.selectedSlot === index));
+    });
     scene.setDesign(s.slots);
     scene.setSelectedSlot(s.selectedSlot);
 

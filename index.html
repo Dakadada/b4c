@@ -16,10 +16,10 @@
   <script src="js/tw-config.js"></script>
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/gold.css" />
+  <link rel="stylesheet" href="css/campaign.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script type="importmap">
     {
       "imports": {
@@ -52,11 +52,13 @@
   <main id="top" class="relative z-10">
 
     <!-- ── Hero ──────────────────────────────────────────────────────────── -->
-    <section class="hero-dark grid min-h-screen grid-rows-[45vh_auto] lg:grid-cols-2 lg:grid-rows-1">
-      <div class="relative order-first lg:order-last" data-cord="0.74">
+    <section class="hero-dark campaign-hero">
+      <div class="hero-halo" aria-hidden="true"></div>
+      <p class="hero-edition" aria-hidden="true">DES MOINES · HANDMADE · ONE FOR ONE</p>
+      <div class="hero-object" data-cord="0.74">
         <div id="hero-canvas" class="absolute inset-0" role="img" aria-label="A rotating 3D bracelet of gold, pearl, garnet and iridescent beads"></div>
       </div>
-      <div class="flex flex-col justify-center px-6 pb-16 md:px-12 lg:pb-0 lg:pt-20">
+      <div class="hero-copy">
         <p class="mb-8 font-mono text-xs uppercase tracking-widest text-garnet" data-hero-fade>Handmade in Des Moines, Iowa</p>
         <h1 class="font-display text-[clamp(3.2rem,7.5vw,6.8rem)] leading-[0.95] tracking-tight">
           <span class="hero-line"><span>One bracelet</span></span>
@@ -72,10 +74,12 @@
           <span class="font-mono text-sm">$4.99 <span class="text-ink/50">· gives one</span></span>
         </div>
       </div>
+      <div class="hero-bottom"><span>SMALL BEADS. SOMETHING BIGGER.</span><a href="#how">SCROLL TO DISCOVER <span aria-hidden="true">↓</span></a><button id="motion-toggle" type="button" aria-pressed="false">Pause motion</button></div>
     </section>
 
     <!-- ── How it works (pinned) ─────────────────────────────────────────── -->
     <section id="how" data-cord="0.5">
+      <figure class="campaign-macro"><img src="assets/campaign/strand.webp" srcset="assets/campaign/strand-mobile.webp 768w, assets/campaign/strand.webp 1536w" sizes="100vw" alt="An editorial study of pearl, gold and garnet beads on burgundy satin" width="1536" height="1024" loading="lazy" /><figcaption><span>01 / THE DETAILS</span><span>MADE BY HAND. MADE TWICE.</span></figcaption></figure>
       <div id="how-pin" class="flex min-h-screen flex-col justify-center px-6 py-24 md:px-12">
         <div class="mb-14 flex items-end justify-between gap-6">
           <p class="font-mono text-xs uppercase tracking-widest text-garnet">How it works</p>
@@ -126,6 +130,7 @@
 
     <!-- ── Impact (pinned) ───────────────────────────────────────────────── -->
     <section id="impact" class="impact-dark" data-cord="0.16">
+      <div class="impact-orbit" aria-hidden="true"></div>
       <div id="impact-pin" class="flex min-h-screen flex-col justify-center px-6 py-24 md:px-12">
         <div class="mb-14 flex items-end justify-between gap-6">
           <p class="font-mono text-xs uppercase tracking-widest text-garnet">The ledger so far</p>
@@ -167,7 +172,8 @@
 
       <div class="grid items-start gap-12 lg:grid-cols-2">
         <div data-cord="0.26">
-          <div id="builder-canvas" class="aspect-square w-full cursor-grab rounded-2xl border border-pewter bg-pearl/60 active:cursor-grabbing" aria-label="Interactive 3D bracelet. Drag to rotate, click a bead to select it."></div>
+          <div class="studio-stage"><div class="studio-meta"><span>YOUR DESIGN / LIVE PREVIEW</span><span>18 BEADS · ∞ POSSIBILITIES</span></div><div id="builder-canvas" class="aspect-square w-full cursor-grab active:cursor-grabbing" aria-label="Interactive 3D bracelet. Drag to rotate, click a bead to select it."></div><div class="studio-reflection" aria-hidden="true"></div><span class="studio-caption">DRAG TO ROTATE · TAP TO SELECT</span></div>
+          <div id="slot-controls" class="slot-controls" aria-label="Select a bracelet bead"></div>
           <p id="builder-hint" class="mt-4 min-h-[1.5rem] font-mono text-xs text-garnet" aria-live="polite"></p>
         </div>
 
@@ -191,6 +197,7 @@
     </section>
 
     <!-- ── Order ─────────────────────────────────────────────────────────── -->
+    <figure class="campaign-macro campaign-knot"><img src="assets/campaign/knot.webp" srcset="assets/campaign/knot-mobile.webp 768w, assets/campaign/knot.webp 1536w" sizes="100vw" width="1536" height="1024" loading="lazy" alt="An editorial close-up of a hand-tied cord and pearl beads on ivory silk" /><figcaption><span>02 / THE HUMAN TOUCH</span><span>NO TWO KNOTS QUITE ALIKE.</span></figcaption></figure>
     <section id="order" class="border-t border-pewter px-6 py-28 md:px-12">
       <div class="mb-16 max-w-3xl" data-reveal>
         <p class="mb-6 font-mono text-xs uppercase tracking-widest text-garnet">Checkout, the small-batch way</p>
@@ -266,5 +273,6 @@
   </footer>
 
   <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/performance-probe.js"></script>
 </body>
 </html>
