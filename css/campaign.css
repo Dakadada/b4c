@@ -72,3 +72,99 @@ button:focus-visible,a:focus-visible { outline:2px solid #c46c7b; outline-offset
  .how-stage { min-height:30rem; } .slot-controls button { width:30px; height:36px; }
 }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; } button:active,a:active { transform:none; } }
+
+/* The show: a lit object, a close-up, a ledger, then a quiet workbench. */
+#cord-svg { display:none; }
+.campaign-hero { min-height:1000px; min-height:max(1000px,100svh); background:#100c0d!important; }
+.hero-halo { display:none; }
+.hero-spotlight { position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 27% 47% at 50% 22%,#8c5e3a40,transparent 85%); mask-image:linear-gradient(#000, #000 55%,transparent); }
+.hero-object { top:70px; left:20%; width:60%; height:470px; }
+.hero-copy { padding:490px 4vw 130px; background:none; }
+.hero-copy h1 { font-size:clamp(64px,6vw,96px); line-height:.96; }
+.hero-copy h1 .hero-line:nth-child(-n+2) { display:block; margin-right:0; }
+.hero-copy h1 .hero-line:last-child { margin-top:.02em; }
+.hero-copy > p:first-child { margin-bottom:24px; }
+.hero-copy > p:nth-of-type(2) { max-width:520px; }
+.hero-edition { top:160px; }
+.hero-bottom { font-size:9px; }
+#motion-toggle { position:fixed; bottom:16px; right:18px; z-index:50; border:1px solid #c4ac98; border-radius:30px; padding:0 16px; background:#171013; color:#f2eadb; font:10px 'IBM Plex Mono',monospace; letter-spacing:.08em; box-shadow:0 3px 18px #0002; }
+#motion-toggle:disabled { opacity:.8; }
+#how { background:#f2eadf; }
+#how-pin { padding:95px 6vw 60px; min-height:0; }
+#how-pin > .mb-14 { margin-bottom:30px; }
+#how-pin > .relative { margin-bottom:60px; }
+.story-layout { display:grid; grid-template-columns:1.05fr 1fr; gap:7vw; align-items:start; }
+.story-photo { margin:0; position:sticky; top:12vh; height:72vh; max-height:760px; overflow:hidden; background:#2b111a; }
+.story-photo img { width:100%; height:100%; object-fit:cover; object-position:60% center; }
+.story-photo::after { content:''; position:absolute; inset:60% 0 0; background:linear-gradient(transparent,#170d15b3); pointer-events:none; }
+.story-photo figcaption { position:absolute; bottom:25px; left:24px; right:24px; z-index:1; display:flex; flex-direction:column; gap:9px; font:9px 'IBM Plex Mono',monospace; letter-spacing:.13em; color:#f2eadb; }
+.how-stage { min-height:0; }
+.story-layout .how-panel { position:relative; inset:auto; display:flex; flex-direction:column; justify-content:center; gap:24px; min-height:78vh; padding:50px 0; }
+.how-panel > p { font:14px 'IBM Plex Mono',monospace; color:#7c2136; }
+.how-panel h2 { font-size:clamp(50px,5.7vw,88px); line-height:1; }
+.how-panel > div > p { font-size:17px; max-width:390px; line-height:1.8; }
+.how-marker { color:#86796e; }
+#impact { background:#1d1219!important; }
+.impact-orbit { display:none; }
+#impact::before { opacity:.3; }
+#impact-pin { min-height:0; padding:110px 8vw; }
+#impact-grid { grid-template-columns:repeat(50,minmax(0,1fr)); gap:7px; }
+.impact-dark .impact-dot { width:100%; max-width:9px; transition:none; box-shadow:none; background:#b65e72; border-color:#b65e72; }
+#impact-pin > .grid { margin-bottom:65px; }
+#builder { background:#eae5dc; }
+#builder > [data-reveal] { max-width:900px; margin:0 auto 70px; text-align:center; }
+#builder > [data-reveal] > p:last-child { margin-left:auto; margin-right:auto; }
+#builder > .grid { grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:6vw; }
+.studio-stage { background:radial-gradient(ellipse at 50% 40%,#fffdf6,#e3d8c9); color:#665447; border:1px solid #d2c4b3; }
+.studio-reflection { background:radial-gradient(ellipse,#72534740,transparent 70%); }
+#order .rounded-2xl:hover { transform:none; }
+.motion-paused *, .motion-paused *::before, .motion-paused *::after { transition:none!important; }
+.motion-paused #how-rail-fill { transform:scaleX(1); }
+@media(min-width:1600px) { .hero-copy { padding-top:490px; } }
+@media(max-width:899px) {
+ .campaign-hero { min-height:940px; }
+ .hero-object { top:80px; left:5%; width:90%; height:390px; }
+ .hero-copy { padding:445px 24px 115px; }
+ .hero-copy h1 { font-size:clamp(48px,8.5vw,72px); }
+ .story-layout { grid-template-columns:1fr; gap:15px; }
+ .story-photo { position:relative; top:auto; height:420px; }
+ .how-panel { min-height:0; padding:45px 0; gap:20px; border-bottom:1px solid #d6c7b9; }
+ .how-panel > div > p { max-width:560px; }
+ #how-rail-fill { transform:scaleX(1); }
+ #how-pin > .relative { margin-bottom:35px; }
+ #builder > .grid { grid-template-columns:1fr; gap:40px; }
+ #impact-grid { grid-template-columns:repeat(30,minmax(0,1fr)); gap:6px; }
+}
+@media(max-width:600px) {
+ .campaign-hero { min-height:900px; }
+ .hero-object { top:90px; height:310px; }
+ .hero-copy { padding-top:380px; }
+ .hero-copy h1 { font-size:clamp(44px,10.5vw,62px); }
+ .hero-copy > p:first-child { font-size:8px; }
+ .hero-copy > div { gap:14px; }
+ .hero-bottom { bottom:32px; }
+ .hero-bottom a { font-size:8px; }
+ #motion-toggle { font-size:8px; right:12px; bottom:12px; min-height:40px; }
+ #how-pin { padding:65px 24px; }
+ .story-photo { height:340px; }
+ .how-panel h2 { font-size:52px; }
+ .how-panel > div > p { font-size:16px; }
+ #impact-pin { padding:75px 24px; }
+ #impact-pin > .grid { gap:35px; margin-bottom:45px; }
+ #impact-grid { gap:5px; }
+ #impact-pin > p:last-child { font-size:21px; }
+ #builder > [data-reveal] { text-align:left; margin-bottom:40px; }
+ #builder h2,#order h2 { font-size:42px; }
+}
+#builder > .grid > div { min-width:0; }
+@media(max-width:899px) {
+ .story-layout .how-panel { min-height:0; padding:45px 0; gap:20px; }
+ #builder > .grid { grid-template-columns:minmax(0,1fr); }
+}
+
+/* One pearl per donation. The paired bloom happens once, then rests. */
+.impact-total { margin:0 0 30px; font:clamp(24px,3vw,42px)/1.2 'Instrument Serif',serif; color:#f2eadb; }
+#impact-grid { grid-template-columns:repeat(50,minmax(0,1fr)); gap:10px; padding:10px 0; }
+#impact-grid .impact-dot { max-width:12px; border:0; background:radial-gradient(circle at 32% 25%,#ffe3bd 0%,#d99691 30%,#a74c68 70%,#703747 100%); box-shadow:0 0 8px #eaa39325; }
+@media(max-width:899px) { #impact-grid { grid-template-columns:repeat(25,minmax(0,1fr)); gap:7px; } }
+@media(max-width:600px) { #impact-grid { gap:6px; } .impact-total { margin-bottom:24px; } }

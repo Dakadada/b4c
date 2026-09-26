@@ -68,7 +68,7 @@ export class BraceletScene {
     this.measure = new URLSearchParams(location.search).has('measure');
     this.renderCount = 0;
     document.addEventListener('campaign-motion', (event) => {
-      this.paused = REDUCED_MOTION || event.detail.paused;
+      this.paused = event.detail.paused;
       this.#renderOnce();
     });
     document.addEventListener('visibilitychange', () => {
@@ -133,7 +133,7 @@ export class BraceletScene {
     this.io = new IntersectionObserver(([entry]) => {
       this.visible = entry.isIntersecting;
       if (this.visible) this.#startLoop();
-    }, { rootMargin: '100px' });
+    }, { rootMargin: '0px' });
     this.io.observe(container);
   }
 
@@ -246,16 +246,16 @@ export class BraceletScene {
       }
       const delta = Math.min(this.clock.getDelta(), 0.05);
       const t = this.clock.elapsedTime;
-      const animated = !this.paused && (!this.interactive || this.selectedSlot !== null);
-      if (!this.paused && !this.interactive) {
+      const animated = !this.paused && !this.interactive && t < 3.5;
+      if (animated) {
         this.group.rotation.z += delta * 0.072;
         this.group.rotation.y = -0.3 + Math.sin(t * 0.22) * 0.12;
       }
       if (this.selectedSlot !== null) {
         const mesh = this.beads[this.selectedSlot];
-        mesh.material.emissiveIntensity = this.paused ? 0.3 : 0.3 + Math.sin(t * 3) * 0.12;
+        mesh.material.emissiveIntensity = 0.3;
         const base = this.slots && this.slots[this.selectedSlot] ? 1 : EMPTY_SCALE;
-        mesh.scale.setScalar(base * (this.paused ? 1 : 1.06 + Math.sin(t * 3) * 0.025));
+        mesh.scale.setScalar(base * 1.06);
       }
       const controlsChanged = this.controls?.update();
       if (this.dirty || animated || controlsChanged) {

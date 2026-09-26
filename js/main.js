@@ -1,14 +1,7 @@
 import { initBuilder } from './builder.js';
 import { initOrder } from './order.js';
 import { DEFAULT_DESIGN } from './beads.js';
-import {
-  initSmoothScroll,
-  initCord,
-  initHero,
-  initHowItWorks,
-  initImpact,
-  initReveals,
-} from './scrollytelling.js';
+import { initSmoothScroll, initImpact, initChoreography } from './scrollytelling.js';
 
 // A failed CDN/module load must not take the order form down with WebGL.
 let BraceletScene;
@@ -45,27 +38,12 @@ builderApi = initBuilder(builderScene);
 
 initOrder();
 
+initImpact();
 if (window.gsap && window.ScrollTrigger) {
   initSmoothScroll();
-  initHero();
-  initHowItWorks();
-  initImpact();
-  initReveals();
-// The cord measures section positions, so it must come after the pinned
-// sections have inserted their spacers.
-initCord();
+  initChoreography();
 } else {
-  document.getElementById('how-pin').classList.add('how-static');
-  initImpact(true);
+  document.getElementById('motion-toggle').hidden = true;
 }
-
-const motionToggle = document.getElementById('motion-toggle');
-motionToggle?.addEventListener('click', () => {
-  const paused = motionToggle.getAttribute('aria-pressed') !== 'true';
-  motionToggle.setAttribute('aria-pressed', String(paused));
-  motionToggle.textContent = paused ? 'Resume ambient motion' : 'Pause ambient motion';
-  document.documentElement.classList.toggle('motion-paused', paused);
-  document.dispatchEvent(new CustomEvent('campaign-motion', { detail: { paused } }));
-});
 
 document.getElementById('year').textContent = new Date().getFullYear();

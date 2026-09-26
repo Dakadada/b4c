@@ -32,12 +32,6 @@
 
 <body class="font-body relative">
 
-  <!-- The cord: a single thread drawn down the page by scroll -->
-  <svg id="cord-svg" aria-hidden="true">
-    <path id="cord-path" d="" />
-    <circle id="cord-tip" r="4" cx="-10" cy="-10" />
-  </svg>
-
   <!-- ── Nav ─────────────────────────────────────────────────────────────── -->
   <header class="hero-nav absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-6 py-5 md:px-12">
     <a href="#top" class="font-display text-xl tracking-tight">Brace4Change</a>
@@ -53,6 +47,7 @@
 
     <!-- ── Hero ──────────────────────────────────────────────────────────── -->
     <section class="hero-dark campaign-hero">
+      <div class="hero-spotlight" aria-hidden="true"></div>
       <div class="hero-halo" aria-hidden="true"></div>
       <p class="hero-edition" aria-hidden="true">DES MOINES · HANDMADE · ONE FOR ONE</p>
       <div class="hero-object" data-cord="0.74">
@@ -77,9 +72,9 @@
       <div class="hero-bottom"><span>SMALL BEADS. SOMETHING BIGGER.</span><a href="#how">SCROLL TO DISCOVER <span aria-hidden="true">↓</span></a><button id="motion-toggle" type="button" aria-pressed="false">Pause motion</button></div>
     </section>
 
-    <!-- ── How it works (pinned) ─────────────────────────────────────────── -->
+    <!-- ── How it works ─────────────────────────────────────────── -->
     <section id="how" data-cord="0.5">
-      <figure class="campaign-macro"><img src="assets/campaign/strand.webp" srcset="assets/campaign/strand-mobile.webp 768w, assets/campaign/strand.webp 1536w" sizes="100vw" alt="An editorial study of pearl, gold and garnet beads on burgundy satin" width="1536" height="1024" loading="lazy" /><figcaption><span>01 / THE DETAILS</span><span>MADE BY HAND. MADE TWICE.</span></figcaption></figure>
+
       <div id="how-pin" class="flex min-h-screen flex-col justify-center px-6 py-24 md:px-12">
         <div class="mb-14 flex items-end justify-between gap-6">
           <p class="font-mono text-xs uppercase tracking-widest text-garnet">How it works</p>
@@ -93,6 +88,8 @@
           <div id="how-rail-fill" class="absolute inset-0 bg-garnet"></div>
         </div>
 
+        <div class="story-layout">
+          <figure class="story-photo"><img src="assets/campaign/strand.webp" srcset="assets/campaign/strand-mobile.webp 768w, assets/campaign/strand.webp 1536w" sizes="(min-width: 900px) 48vw, 100vw" alt="An editorial study of pearl, gold and garnet beads on burgundy satin" width="1536" height="1024" loading="lazy" /><figcaption><span>01 / THE DETAILS</span><span>MADE BY HAND. MADE TWICE.</span></figcaption></figure>
         <div class="how-stage">
           <article class="how-panel grid gap-8 lg:grid-cols-12">
             <p class="font-display text-[clamp(5rem,12vw,11rem)] leading-none text-pewter lg:col-span-4">01</p>
@@ -125,10 +122,11 @@
             </div>
           </article>
         </div>
+        </div>
       </div>
     </section>
 
-    <!-- ── Impact (pinned) ───────────────────────────────────────────────── -->
+    <!-- ── Impact ───────────────────────────────────────────────── -->
     <section id="impact" class="impact-dark" data-cord="0.16">
       <div class="impact-orbit" aria-hidden="true"></div>
       <div id="impact-pin" class="flex min-h-screen flex-col justify-center px-6 py-24 md:px-12">
@@ -143,17 +141,18 @@
             <p class="mt-3 border-t border-pewter pt-3 text-sm text-ink/60">bracelets given away</p>
           </div>
           <div>
+            <p id="stat-sold" class="font-mono text-6xl md:text-7xl">0</p>
+            <p class="mt-3 border-t border-pewter pt-3 text-sm text-ink/60">bracelets sold</p>
+          </div>
+          <div>
             <p id="stat-notes" class="font-mono text-6xl md:text-7xl">0</p>
             <p class="mt-3 border-t border-pewter pt-3 text-sm text-ink/60">notes written by hand</p>
           </div>
-          <div>
-            <p id="stat-places" class="font-mono text-6xl md:text-7xl">0</p>
-            <p class="mt-3 border-t border-pewter pt-3 text-sm text-ink/60">nursing homes &amp; shelters reached</p>
-          </div>
         </div>
 
+        <p id="impact-total" class="impact-total"></p>
         <div id="impact-grid" aria-hidden="true"></div>
-        <p class="mt-8 font-display text-2xl italic text-ink/60">Every dot is a bracelet on someone's wrist.</p>
+        <p class="mt-8 font-display text-2xl italic text-ink/60">Every dot is a donated bracelet on someone's wrist.</p>
       </div>
     </section>
 
@@ -197,7 +196,7 @@
     </section>
 
     <!-- ── Order ─────────────────────────────────────────────────────────── -->
-    <figure class="campaign-macro campaign-knot"><img src="assets/campaign/knot.webp" srcset="assets/campaign/knot-mobile.webp 768w, assets/campaign/knot.webp 1536w" sizes="100vw" width="1536" height="1024" loading="lazy" alt="An editorial close-up of a hand-tied cord and pearl beads on ivory silk" /><figcaption><span>02 / THE HUMAN TOUCH</span><span>NO TWO KNOTS QUITE ALIKE.</span></figcaption></figure>
+
     <section id="order" class="border-t border-pewter px-6 py-28 md:px-12">
       <div class="mb-16 max-w-3xl" data-reveal>
         <p class="mb-6 font-mono text-xs uppercase tracking-widest text-garnet">Checkout, the small-batch way</p>
