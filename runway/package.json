@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/contracts.mjs && node tests/presentation.mjs && node tests/performance.mjs && node tests/scene-contracts.mjs && node tests/camera.mjs && node tests/main-site.mjs"
+  }
+}

@@ -1,0 +1,254 @@
+:root {
+  --porcelain: #f5f4f0;
+  --ink: #1b1a17;
+  --pewter: #c9c7be;
+  --garnet: #7c2136;
+  --pearl: #edeae3;
+}
+
+html {
+  scroll-behavior: auto; /* Wheel and touch stay native; anchors opt into smooth. */
+}
+
+body {
+  background: var(--porcelain);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--garnet);
+  color: var(--porcelain);
+}
+
+:focus-visible {
+  outline: 2px solid var(--garnet);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── The cord ─────────────────────────────────────────────────────────────── */
+#cord-svg {
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#cord-path {
+  fill: none;
+  stroke: var(--garnet);
+  stroke-width: 1.5;
+  opacity: 0.55;
+}
+
+#cord-tip {
+  fill: var(--garnet);
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────────────── */
+.hero-line {
+  display: block;
+  overflow: hidden;
+  /* room for italic descenders inside the clip */
+  padding-bottom: 0.09em;
+  margin-bottom: -0.09em;
+}
+
+.hero-line > span {
+  display: block;
+  will-change: transform;
+}
+
+#hero-canvas canvas,
+#builder-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── How it works ─────────────────────────────────────────────────────────── */
+.how-stage {
+  position: relative;
+  min-height: 22rem;
+}
+
+.how-panel {
+  position: absolute;
+  inset: 0;
+}
+
+.how-marker {
+  transition: color 0.3s, border-color 0.3s;
+  color: var(--pewter);
+  border-color: var(--pewter);
+}
+
+.how-marker.is-active {
+  color: var(--garnet);
+  border-color: var(--garnet);
+}
+
+#how-rail-fill {
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* Reduced motion: no pinning — stack the three stations vertically. */
+.how-static .how-stage {
+  min-height: 0;
+}
+
+.how-static .how-panel {
+  position: static;
+  margin-bottom: 4rem;
+}
+
+.how-static .how-marker {
+  color: var(--garnet);
+  border-color: var(--garnet);
+}
+
+.how-static #how-rail-fill {
+  transform: scaleX(1);
+}
+
+/* ── Impact ───────────────────────────────────────────────────────────────── */
+#impact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14px, 1fr));
+  gap: 8px;
+}
+
+.impact-dot {
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  border: 1px solid var(--pewter);
+  transition: background-color 0.25s, border-color 0.25s;
+}
+
+.impact-dot.is-filled {
+  background: var(--garnet);
+  border-color: var(--garnet);
+}
+
+/* ── Builder palette ──────────────────────────────────────────────────────── */
+.palette-tab {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--pewter);
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+}
+
+.palette-tab:hover {
+  border-color: var(--ink);
+}
+
+.palette-tab[aria-selected='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--porcelain);
+}
+
+.swatch {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  border: 1px solid rgb(0 0 0 / 0.08);
+  transition: transform 0.18s ease;
+}
+
+.swatch:hover {
+  transform: scale(1.1);
+}
+
+.swatch[aria-pressed='true'] {
+  box-shadow: 0 0 0 2px var(--porcelain), 0 0 0 4px var(--garnet);
+}
+
+.swatch-label {
+  position: absolute;
+  left: 50%;
+  bottom: -1.4rem;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.62rem;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity 0.18s;
+  pointer-events: none;
+}
+
+.swatch:hover .swatch-label,
+.swatch:focus-visible .swatch-label {
+  opacity: 0.75;
+}
+
+#builder-hint {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#builder-hint.is-visible {
+  opacity: 1;
+}
+
+/* ── Team ─────────────────────────────────────────────────────────────────── */
+.team-avatar {
+  display: block;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgb(0 0 0 / 0.08);
+}
+
+/* ── Order ────────────────────────────────────────────────────────────────── */
+#design-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.strip-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+}
+
+.strip-dot-empty {
+  border: 1px dashed var(--pewter);
+}
+
+.order-input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--pewter);
+  padding: 0.6rem 0;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.order-input:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+
+.order-input::placeholder {
+  color: rgb(27 26 23 / 0.35);
+}
+
+/* ── Motion safety ────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

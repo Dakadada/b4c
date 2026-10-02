@@ -1,0 +1,154 @@
+[
+  {
+    "name": "master",
+    "source": "exec-2b224761-8c83-4d58-b3e2-1ee5a01605fa.png",
+    "mode": "RGB",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "bytes": 90970
+  },
+  {
+    "name": "master-mobile",
+    "source": "exec-9c03d66e-9f0d-422b-90d7-05ebef6ab4d2.png",
+    "mode": "RGB",
+    "dimensions": [
+      800,
+      1421
+    ],
+    "bytes": 73532
+  },
+  {
+    "name": "near",
+    "source": "exec-62d419f7-6a01-4133-b950-0ce70e363477.png",
+    "mode": "RGBA",
+    "dimensions": [
+      1200,
+      1009
+    ],
+    "bytes": 194300
+  },
+  {
+    "name": "far",
+    "source": "exec-94be6e54-7ab4-4c07-b7d5-cd660475b1b0.png",
+    "mode": "RGBA",
+    "dimensions": [
+      1200,
+      675
+    ],
+    "bytes": 48436
+  },
+  {
+    "name": "interior",
+    "source": "exec-fabc12e2-494c-442a-bee2-20e5455f3e00.png",
+    "mode": "RGB",
+    "dimensions": [
+      1200,
+      675
+    ],
+    "bytes": 81328
+  },
+  {
+    "name": "note",
+    "source": "exec-126049f6-875d-4810-8c27-f30c4e54c1b4.png",
+    "mode": "RGB",
+    "dimensions": [
+      1200,
+      675
+    ],
+    "bytes": 79296
+  },
+  {
+    "name": "paper",
+    "source": "exec-4dc8e793-b42d-4cca-9504-f845f39988a1.png",
+    "mode": "RGBA",
+    "dimensions": [
+      1200,
+      800
+    ],
+    "bytes": 99258
+  },
+  {
+    "name": "closing",
+    "source": "exec-0a9c3a31-8b57-43b9-8197-1ea758a6e701.png",
+    "mode": "RGB",
+    "dimensions": [
+      1200,
+      675
+    ],
+    "bytes": 44264
+  },
+  {
+    "name": "prologue-close",
+    "source": "built-in imagegen 2026-10-02",
+    "mode": "RGB",
+    "dimensions": [
+      1599,
+      900
+    ],
+    "bytes": 108612
+  },
+  {
+    "name": "prologue-close-mobile",
+    "source": "built-in imagegen 2026-10-02",
+    "mode": "RGB",
+    "dimensions": [
+      800,
+      1421
+    ],
+    "bytes": 71620
+  },
+  {
+    "name": "prologue-wide",
+    "source": "built-in imagegen 2026-10-02",
+    "mode": "RGB",
+    "dimensions": [
+      1599,
+      900
+    ],
+    "bytes": 69682
+  },
+  {
+    "name": "prologue-wide-mobile",
+    "source": "built-in imagegen 2026-10-02",
+    "mode": "RGB",
+    "dimensions": [
+      800,
+      1421
+    ],
+    "bytes": 79322
+  },
+  {
+    "name": "world-camera",
+    "source": "exec-f514e267-9a2d-4118-8516-c509afa77ea1.png",
+    "mode": "RGB",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "bytes": 164008,
+    "destination": [
+      0.591,
+      0.397,
+      0.354,
+      0.452
+    ]
+  },
+  {
+    "name": "world-camera-mobile",
+    "source": "exec-e9ba5186-a08d-4d46-8864-549125363ee3.png",
+    "mode": "RGB",
+    "dimensions": [
+      800,
+      1421
+    ],
+    "bytes": 123300,
+    "destination": [
+      0.584,
+      0.55,
+      0.367,
+      0.31
+    ]
+  }
+]
