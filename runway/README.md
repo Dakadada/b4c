@@ -1,5 +1,5 @@
-# Brace4Change — main site
+# Brace4Change — camera preview (previous main site)
 
-The camera version is now served at the repository root (`/`, `/index.html`, `/team.html`, `/legal.html`). Root pages load the same modules, styles and artwork in `runway/`; `/runway/` remains available with identical presentation and builder behavior. No deployment or commit was made. Copyright notices have been removed from every page.
+The main site is no longer served from this folder. The repository root (`/`, `/team.html`, `/legal.html`) now serves the "One Pull" site, whose code lives in `next/one-pull/` and `next/shared/` (tests: `npm test --prefix next`).
 
-Run `npm test --prefix runway`. See `verification/ACCEPTANCE.md` for browser evidence and the outstanding physical iPhone performance checks. `window.presentation` exposes `setProgress`, `setPaused`, `refresh` and `destroy`; chapters include prologue, opening, making, impact and handoff. Native scrolling and readable fallback flow are retained.
+This folder keeps the earlier cinematic camera version, still reachable at `/runway/` with its own modules, styles and artwork. Run `npm test --prefix runway` for its contracts. See `verification/ACCEPTANCE.md` for the browser evidence recorded for that version. `window.presentation` exposes `setProgress`, `setPaused`, `refresh` and `destroy`; chapters include prologue, opening, making, impact and handoff.
