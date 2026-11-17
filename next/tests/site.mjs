@@ -34,7 +34,7 @@ const index = pages['index.html'];
 assert.match(index, /"three":"https:\/\/cdn\.jsdelivr\.net\/npm\/three@\d+\.\d+\.\d+\/build\/three\.module\.js"/, 'three.js is pinned to an exact version');
 assert.match(index, /src="next\/one-pull\/page\.js"/);
 // Every element the scripts look up by id is on the page.
-const scripts = ['next/one-pull/page.js', 'next/shared/page.js', 'next/shared/order.js'];
+const scripts = ['next/one-pull/page.js', 'next/one-pull/scroll.js', 'next/shared/page.js', 'next/shared/order.js'];
 let lookups = 0;
 for (const file of scripts) {
   const source = await read(file);
@@ -46,6 +46,9 @@ for (const file of scripts) {
 // The three steps, the tally, and the order form all carry a live preview of the design.
 assert.ok([...index.matchAll(/data-mini/g)].length >= 6);
 assert.match(index, /650 bracelets given since fall 2025/);
+assert.match(index, /Yours would be number 651\./, 'the tally labels the visitor\'s own bracelet');
+// Scroll moments are driven by --p, which defaults to finished, so nothing is hidden if the script never runs.
+assert.match(await read('next/one-pull/style.css'), /\.step-art \{ --p: 1; \}/);
 assert.match(index, /\$4\.99/);
 
 // The team page renders from the shared bead catalog, with no leftovers from the old site.

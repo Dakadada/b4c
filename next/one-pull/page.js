@@ -1,6 +1,7 @@
 import { initPage, webglAvailable } from '../shared/page.js';
-import { BEADS, CATEGORIES } from '../shared/beads.js';
-import { place, setDesign } from '../shared/store.js';
+import { BEADS, BEADS_BY_ID, CATEGORIES } from '../shared/beads.js';
+import { place, setDesign, subscribe } from '../shared/store.js';
+import { initScroll } from './scroll.js';
 
 // This page opens on a design with no metal in it, so the gold cord is the only gold on the cloth.
 const OPENING = ['garnet', 'ivory-pearl', 'peacock', 'ivory-pearl', 'cornflower', 'ivory-pearl'];
@@ -39,6 +40,7 @@ function renderTray() {
   }));
 }
 renderTray();
+initScroll();
 
 // No WebGL, or the 3D library failed to load: two CSS bracelets stand in for the cord.
 const flat = () => document.documentElement.classList.add('no-webgl');
@@ -53,7 +55,9 @@ if (webglAvailable()) {
       tagKept: document.getElementById('tag-kept'),
       tagGiven: document.getElementById('tag-given'),
     });
-    ledger.initLedger(document.getElementById('ledger'), { motion: 'draw', envFloor: 0x1c1d21, floorOpacity: 0.6 });
+    // The tally ends with one more bracelet: the visitor's own design, as number 651.
+    const tally = ledger.initLedger(document.getElementById('ledger'), { motion: 'draw', envFloor: 0x1c1d21, floorOpacity: 0.6, yours: { label: document.getElementById('ledger-yours') } });
+    subscribe((state) => tally.setYours(state.slots.map((id) => BEADS_BY_ID[id]?.color)));
   }).catch((error) => { console.error(error); flat(); });
 } else {
   flat();

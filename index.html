@@ -117,7 +117,10 @@
     <h2>650 bracelets given since fall 2025.</h2>
     <p>Each ring is one of them, on a wrist in a Des Moines nursing home or shelter. That is 650 sold, 650 given, and 650 notes written by hand.</p>
   </div>
-  <canvas id="ledger" role="img" aria-label="650 small rings laid out in rows, one for each bracelet given away."></canvas>
+  <div class="ledger-wrap">
+    <canvas id="ledger" role="img" aria-label="650 small rings laid out in rows, one for each bracelet given away, and one more in your colors at the end."></canvas>
+    <p class="yours" id="ledger-yours">Yours would be number 651.</p>
+  </div>
 </section>
 
 <section class="order" id="order">
@@ -157,7 +160,10 @@
 </main>
 
 <footer>
-  <p class="closing">One kept,<br><em>one given.</em></p>
+  <div class="closing-row">
+    <p class="closing">One kept,<br><em>one given.</em></p>
+    <div class="closing-rings"><div class="mini-ring" data-mini></div><div class="mini-ring" data-mini></div></div>
+  </div>
   <div class="foot">
     <a class="brand" href="#top">Brace4Change</a>
     <p>Handmade in Des Moines, Iowa.</p>

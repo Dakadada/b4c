@@ -134,12 +134,42 @@ svg { width: 1.2em; height: 1.2em; fill: none; stroke: currentColor; stroke-widt
 .note-card .mini-ring::before { border-color: #2a2340; border-width: 1.5px; }
 .note figcaption { color: var(--slate); font-size: 0.9375rem; }
 
+/* ── Scroll moments ─────────────────────────────────────────────────────── */
+main { position: relative; }
+.thread { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.thread path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.thread-cord { stroke: var(--gold); stroke-width: 2.5; }
+.thread-shade { stroke: rgb(8 4 16 / 0.5); stroke-width: 3; transform: translate(1.5px, 3px); }
+.thread-knot { fill: var(--gold); transition: opacity 0.3s; }
+/* The beads sit on the cord, so the strip's own line steps aside for it. */
+/* Beads waiting to slide in must not widen the page. */
+.motion .how { overflow-x: clip; }
+.has-thread .how .mini-strip { z-index: 1; }
+.has-thread .how .mini-strip::before { display: none; }
+/* The three steps are tied to scroll: --p runs 0 to 1 as a step rises into the middle of
+   the screen, and back again. It defaults to 1, so without the script each step is finished. */
+.step-art { --p: 1; }
+.motion .step-copy { transition: opacity 0.45s; }
+.motion .step:not(.now) .step-copy { opacity: 0.6; }
+/* Step one: the beads slide onto the cord, in slot order. */
+.how .mini-strip .mb { --k: clamp(0, (var(--p) * 22 - var(--i)) / 4, 1); opacity: var(--k); transform: translateX(calc((1 - var(--k)) * 64px)); }
+/* Step two: one bracelet parts into two. */
+.step-art.pair > div:first-child { transform: translateX(calc((1 - var(--p)) * (50% + 8px))); }
+.step-art.pair > div:last-child { transform: translateX(calc((1 - var(--p)) * (-50% - 8px))); }
+.step-art.pair .tag-flat { opacity: clamp(0, var(--p) * 4 - 3, 1); }
+/* Step three: the note is written, a line at a time. */
+.step-art .w { opacity: clamp(0, (var(--p) * (var(--n, 1) + 0.3) - var(--l) - var(--x)) * 5, 1); }
+.motion .how .mini-strip .mb, .motion .step-art.pair > div, .motion .step-art .w { transition: opacity 0.18s linear, transform 0.18s linear; }
+
 /* ── 650 given ──────────────────────────────────────────────────────────── */
 .given { background: var(--panel); padding: clamp(64px, 9vw, 120px) 0 0; }
 .given-copy { padding: 0 var(--gutter); max-width: 1320px; margin: 0 auto; }
 .given h2 { color: var(--lavender); }
 .given p { margin-top: 18px; max-width: 52ch; font-size: 1.125rem; color: var(--soft); }
 #ledger { display: block; width: 100%; height: clamp(320px, 58svh, 640px); }
+.ledger-wrap { position: relative; }
+.given .yours { position: absolute; left: 0; top: 0; margin: 0; max-width: none; font-size: 0.9375rem; font-weight: 600; color: var(--lavender); white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity 0.6s; }
+.given .yours.on { opacity: 1; }
 
 /* ── Order ──────────────────────────────────────────────────────────────── */
 .order { padding: clamp(64px, 9vw, 120px) var(--gutter); }
@@ -159,7 +189,9 @@ textarea { resize: vertical; }
 .checkbox input { width: 22px; height: 22px; margin-top: 3px; flex: none; }
 #order-note-field { margin-top: 24px; }
 #order-gives { margin-top: 28px; color: var(--lavender); font-weight: 600; }
-.ticket { --focus: var(--ink); display: grid; gap: 18px; padding: clamp(26px, 3.4vw, 40px); border-radius: 22px; background: var(--bone); color: var(--ink); box-shadow: 0 24px 48px rgb(8 4 16 / 0.55); }
+.ticket { --focus: var(--ink); position: relative; display: grid; gap: 18px; padding: clamp(26px, 3.4vw, 40px); border-radius: 22px; background: var(--bone); color: var(--ink); box-shadow: 0 24px 48px rgb(8 4 16 / 0.55); }
+/* The ticket hangs from the cord like a tag: a punched hole where the cord ties off. */
+.has-thread .ticket::before { content: ''; position: absolute; left: 50%; top: 12px; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; background: var(--ground); box-shadow: inset 0 2px 3px rgb(0 0 0 / 0.6); }
 .ticket-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 .ticket-head h3 { font-size: 2rem; font-weight: 800; }
 .ticket-head strong { font: 900 2.6rem/1 var(--display); letter-spacing: 0.02em; font-variant-numeric: tabular-nums; }
@@ -172,7 +204,10 @@ pre { margin: 14px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; font: 40
 
 /* ── Close ──────────────────────────────────────────────────────────────── */
 footer { padding: clamp(64px, 10vw, 128px) var(--gutter) 40px; border-top: 1.5px dashed var(--stitch); }
-.closing { font: 900 clamp(3.6rem, 11vw, 6rem)/0.86 var(--display); text-transform: uppercase; letter-spacing: 0.012em; max-width: 1320px; margin: 0 auto; color: var(--lavender); }
+.closing-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 36px 48px; max-width: 1320px; margin: 0 auto; }
+.closing { font: 900 clamp(3.6rem, 11vw, 6rem)/0.86 var(--display); text-transform: uppercase; letter-spacing: 0.012em; color: var(--lavender); }
+.closing-rings { display: flex; gap: clamp(14px, 3vw, 36px); }
+.closing-rings .mini-ring { --d: clamp(118px, 15vw, 190px); }
 .closing em { font-style: normal; color: var(--bone); }
 .foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 40px; max-width: 1320px; margin: clamp(48px, 8vw, 96px) auto 0; padding-top: 24px; border-top: 1.5px dashed var(--stitch); color: var(--soft); }
 .foot nav { display: flex; flex-wrap: wrap; gap: 8px 28px; }
