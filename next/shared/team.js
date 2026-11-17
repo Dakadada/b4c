@@ -1,8 +1,7 @@
 import { BEADS_BY_ID } from './beads.js';
-import { swatchStyle } from './builder.js';
 
 // ⚠️ Placeholder people — edit this array only; the page renders itself.
-// `beadId` picks the member's avatar bead (any id from js/beads.js).
+// `beadId` picks the member's avatar bead (any id from beads.js).
 const TEAM = [
   { name: 'Srihari Kumaresan', role: 'Founder', line: 'Started Brace4Change from his kitchen table with a bag of beads', beadId: 'garnet' },
   { name: 'Savi Reddy', role: 'Co-founder', line: 'Keeps the twin of every bracelet honest.', beadId: 'gold' },
@@ -18,19 +17,16 @@ const TEAM = [
 const grid = document.getElementById('team-grid');
 TEAM.forEach((member) => {
   const card = document.createElement('article');
-  card.className = 'flex flex-col items-start gap-4 border-t border-pewter pt-6';
   const avatar = document.createElement('span');
   avatar.className = 'team-avatar';
-  avatar.style.cssText = swatchStyle(BEADS_BY_ID[member.beadId]);
+  avatar.style.background = BEADS_BY_ID[member.beadId].color;
   avatar.setAttribute('aria-hidden', 'true');
   const name = document.createElement('h3');
-  name.className = 'font-display text-2xl';
   name.textContent = member.name;
   const role = document.createElement('p');
-  role.className = 'font-mono text-xs uppercase tracking-widest text-garnet';
+  role.className = 'team-role';
   role.textContent = member.role;
   const line = document.createElement('p');
-  line.className = 'text-sm leading-relaxed text-ink/60';
   line.textContent = member.line;
   card.append(avatar, name, role, line);
   grid.appendChild(card);

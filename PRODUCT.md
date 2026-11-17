@@ -31,7 +31,7 @@ Every order is made twice: the buyer's own design, bead for bead, ends up on a s
 
 - Ordering, payment, and pickup or delivery are arranged over Instagram DM with `@brace4change.official`. The site has no cart, no payment, no accounts, no analytics, and no cookies.
 - The builder runs entirely in the browser. A design leaves the device only when the visitor copies the order summary and sends it.
-- A bracelet has 18 bead slots. The catalog has 24 beads in four finishes: metallic, pearly, kaleidoscopic, solid (`runway/js/beads.js`).
+- A bracelet has 18 bead slots. The catalog has 24 beads in four finishes: metallic, pearly, kaleidoscopic, solid (`next/shared/beads.js`).
 - Buyers may add their own words (up to 240 characters) to the handwritten note; only those words travel with the donated bracelet.
 
 ## Capabilities and Constraints
@@ -52,8 +52,8 @@ Every order is made twice: the buyer's own design, bead for bead, ends up on a s
 ## Evidence on Hand
 
 - 650 bracelets given away, 650 sold, 650 notes written by hand, since fall 2025. Confirmed real by the user on 2026-11-16.
-- Bead catalog with names, colors, and material recipes: `runway/js/beads.js`.
-- Team roster in `runway/js/team.js` is marked in code as placeholder people; treat as unconfirmed.
+- Bead catalog with names, colors, and material recipes: `next/shared/beads.js`.
+- Team roster in `next/shared/team.js` is marked in code as placeholder people; treat as unconfirmed.
 - No testimonials, press, partner names, or recipient stories exist. Do not fabricate them.
 
 ## Product Principles

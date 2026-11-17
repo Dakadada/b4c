@@ -48,6 +48,10 @@ assert.ok([...index.matchAll(/data-mini/g)].length >= 6);
 assert.match(index, /650 bracelets given since fall 2025/);
 assert.match(index, /\$4\.99/);
 
+// The team page renders from the shared bead catalog, with no leftovers from the old site.
+assert.match(pages['team.html'], /src="next\/shared\/team\.js"/);
+for (const [name, html] of Object.entries(pages)) assert.ok(!/runway\//.test(html), `${name} does not reference the removed runway folder`);
+
 // Every relative import between modules resolves.
 let imports = 0;
 for (const dir of ['next/one-pull', 'next/bead-box', 'next/shared']) {
